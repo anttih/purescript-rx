@@ -1,0 +1,12 @@
+{
+  "name": "purescript-rx",
+  "description": "RxJs bindings for PureScript",
+  "dependencies": {
+        "purescript-jquery": "*",
+        "purescript-dom": "*",
+        "rxjs": "*",
+        "rxjs-jquery": "*",
+        "jquery": "*"
+  }
+}
+
