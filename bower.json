@@ -2,11 +2,11 @@
   "name": "purescript-rx",
   "description": "RxJs bindings for PureScript",
   "dependencies": {
-        "purescript-jquery": "*",
-        "purescript-dom": "*",
-        "rxjs": "*",
-        "rxjs-jquery": "*",
-        "jquery": "*"
+        "purescript-jquery": "0.2.3",
+        "purescript-dom": "0.1.1",
+        "rxjs": "2.3.18",
+        "rxjs-jquery": "1.1.7",
+        "jquery": "2.1.1"
   }
 }
 
