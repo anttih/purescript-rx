@@ -1,17 +1,4 @@
-module Rx.Observable
-  ( Observable()
-  , Reactive()
-  , just
-  , empty
-  , subscribe
-  , merge
-  , combineLatest
-  , take
-  , map
-  , unwrap
-  , scan
-  , switchLatest
-  ) where
+module Rx.Observable where
 
 import Prelude
 import Control.Monad.Eff
@@ -34,6 +21,9 @@ instance observableBind :: Bind Observable where
   (>>=) = flatMap
 
 instance monadObservable :: Monad Observable
+
+instance semigroupObservable :: Semigroup (Observable a) where
+  (<>) = concat
 
 foreign import just
   """
@@ -87,6 +77,15 @@ foreign import combineLatest
     };
   }
   """ :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
+
+foreign import concat
+  """
+  function concat(x) {
+    return function(y) {
+      return x.concat(y);
+    };
+  };
+  """ :: forall a. Observable a -> Observable a -> Observable a
 
 foreign import take
   """
