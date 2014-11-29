@@ -4,7 +4,7 @@
 
 ### Types
 
-    data Observable a
+    data Observable :: * -> *
 
     data Reactive :: !
 
@@ -21,12 +21,20 @@
 
     instance observableFunctor :: Functor Observable
 
+    instance semigroupObservable :: Semigroup (Observable a)
+
 
 ### Values
 
     combineLatest :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
 
+    concat :: forall a. Observable a -> Observable a -> Observable a
+
     empty :: forall a. Observable a
+
+    flatMap :: forall a b. Observable a -> (a -> Observable b) -> Observable b
+
+    fromArray :: forall a. [a] -> Observable a
 
     just :: forall a. a -> Observable a
 
