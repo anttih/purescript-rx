@@ -32,6 +32,13 @@ foreign import just
   }
   """ :: forall a. a -> Observable a
 
+foreign import fromArray
+  """
+  function fromArray(xs) {
+    return Rx.Observable.fromArray(xs);
+  }
+  """ :: forall a. [a] -> Observable a
+
 foreign import empty
   """
   var empty = (function () {
