@@ -19,7 +19,7 @@ import DOM
 
 foreign import data Reactive :: !
 
-data Observable a = Observable a
+foreign import data Observable :: * -> *
 
 instance observableFunctor :: Functor Observable where
   (<$>) = map
