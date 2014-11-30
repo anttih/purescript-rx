@@ -79,7 +79,9 @@ foreign import combineLatest
   function combineLatest(f) {
     return function(ob1) {
       return function(ob2) {
-        return ob1.combineLatest(ob2, f);
+        return ob1.combineLatest(ob2, function (x, y) {
+          return f(x)(y);
+        });
       };
     };
   }
