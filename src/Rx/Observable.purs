@@ -61,9 +61,7 @@ foreign import subscribe
       }
     };
   }
-  """ :: forall eff a b. Observable a
-                      -> (a -> Eff (dom :: DOM | eff) b)
-                      -> Eff (dom :: DOM | eff) b
+  """ :: forall eff a. Observable a -> (a -> Eff eff Unit) -> Eff eff Unit
 
 foreign import merge
   """
