@@ -103,6 +103,15 @@ foreign import take
   }
   """ :: forall a. Number -> Observable a -> Observable a
 
+foreign import takeUntil
+  """
+  function takeUntil(other) {
+    return function(ob) {
+      return ob.takeUntil(other);
+    };
+  }
+  """ :: forall a b. Observable b -> Observable a -> Observable a
+
 foreign import map
   """
   function map(f) {
