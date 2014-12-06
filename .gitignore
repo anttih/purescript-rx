@@ -3,4 +3,3 @@ output/
 .psci
 .psci_modules/
 dist/
-examples/combinators.js
