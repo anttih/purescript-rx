@@ -4,8 +4,6 @@ import Prelude
 import Control.Monad.Eff
 import DOM
 
-foreign import data Reactive :: !
-
 foreign import data Observable :: * -> *
 
 instance observableFunctor :: Functor Observable where
