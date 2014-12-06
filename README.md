@@ -6,8 +6,6 @@
 
     data Observable :: * -> *
 
-    data Reactive :: !
-
 
 ### Type Class Instances
 
@@ -44,11 +42,13 @@
 
     scan :: forall a b. Observable a -> (a -> b -> b) -> b -> Observable b
 
-    subscribe :: forall eff a b. Observable a -> (a -> Eff (dom :: DOM | eff) b) -> Eff (dom :: DOM | eff) b
+    subscribe :: forall eff a. Observable a -> (a -> Eff eff Unit) -> Eff eff Unit
 
     switchLatest :: forall a. Observable (Observable a) -> Observable a
 
     take :: forall a. Number -> Observable a -> Observable a
+
+    takeUntil :: forall a b. Observable b -> Observable a -> Observable a
 
     unwrap :: forall eff a. Observable (Eff eff a) -> Eff eff (Observable a)
 
