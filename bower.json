@@ -1,12 +1,19 @@
 {
   "name": "purescript-rx",
   "description": "RxJs bindings for PureScript",
+  "version": "0.1.0",
+  "keywords": ["purescript", "frp", "rx"],
+  "license": "MIT",
+  "ignore": [
+    "examples",
+    "build.sh"
+  ],
   "dependencies": {
-        "purescript-jquery": "0.2.3",
-        "purescript-dom": "0.1.1",
-        "rxjs": "2.3.18",
-        "rxjs-jquery": "1.1.7",
-        "jquery": "2.1.1"
+    "purescript-jquery": "0.2.3",
+    "purescript-dom": "0.1.1",
+    "rxjs": "2.3.18",
+    "rxjs-jquery": "1.1.7",
+    "jquery": "2.1.1"
   }
 }
 
