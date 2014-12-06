@@ -158,3 +158,12 @@ foreign import switchLatest
     return ob.switchLatest();
   }
   """ :: forall a. Observable (Observable a) -> Observable a
+
+foreign import debounce
+  """
+  function debounce(ms) {
+    return function(ob) {
+      return ob.debounce(ms);
+    };
+  }
+  """ :: forall a. Number -> Observable a -> Observable a
