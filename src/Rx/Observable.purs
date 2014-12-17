@@ -132,7 +132,7 @@ foreign import flatMapLatest
   """
   function flatMapLatest(ob) {
     return function(f) {
-      return ob.flatMap(f);
+      return ob.flatMapLatest(f);
     }
   }
   """ :: forall a b. Observable a -> (a -> Observable b) -> Observable b
