@@ -16,7 +16,7 @@ instance applicativeObservable :: Applicative Observable where
   pure = just
 
 instance observableBind :: Bind Observable where
-  (>>=) = flatMap
+  (>>=) = flatMapLatest
 
 instance monadObservable :: Monad Observable
 
@@ -122,6 +122,15 @@ foreign import map
 foreign import flatMap
   """
   function flatMap(ob) {
+    return function(f) {
+      return ob.flatMap(f);
+    }
+  }
+  """ :: forall a b. Observable a -> (a -> Observable b) -> Observable b
+
+foreign import flatMapLatest
+  """
+  function flatMapLatest(ob) {
     return function(f) {
       return ob.flatMap(f);
     }
