@@ -11,3 +11,6 @@ main = do
 
   subscribe (combineLatest (+) a b) $ trace <<< show
 
+  subscribe (zip (+) a b) (\n -> trace $ "zip: " ++ show n)
+
+  subscribe (reduce (+) 0 (zip (+) a b)) $ trace <<< show
