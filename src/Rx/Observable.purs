@@ -206,7 +206,7 @@ foreign import reduce
 
 foreign import delay
 """
-function(ms){
+function delay(ms){
   return function(ob){
     return ob.delay(ms)
   }
