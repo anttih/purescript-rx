@@ -30,9 +30,13 @@
 
     debounce :: forall a. Number -> Observable a -> Observable a
 
+    delay :: forall a. Number -> Observable a -> Observable a
+
     empty :: forall a. Observable a
 
     flatMap :: forall a b. Observable a -> (a -> Observable b) -> Observable b
+
+    flatMapLatest :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 
     fromArray :: forall a. [a] -> Observable a
 

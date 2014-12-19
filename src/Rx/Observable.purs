@@ -16,7 +16,7 @@ instance applicativeObservable :: Applicative Observable where
   pure = just
 
 instance observableBind :: Bind Observable where
-  (>>=) = flatMap
+  (>>=) = flatMapLatest
 
 instance monadObservable :: Monad Observable
 
@@ -128,6 +128,15 @@ foreign import flatMap
   }
   """ :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 
+foreign import flatMapLatest
+  """
+  function flatMapLatest(ob) {
+    return function(f) {
+      return ob.flatMapLatest(f);
+    }
+  }
+  """ :: forall a b. Observable a -> (a -> Observable b) -> Observable b
+
 foreign import scan
   """
   function scan(ob) {
@@ -194,3 +203,12 @@ foreign import reduce
     }
   }
   """ :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
+
+foreign import delay
+"""
+function delay(ms){
+  return function(ob){
+    return ob.delay(ms)
+  }
+}
+""" :: forall a. Number -> Observable a -> Observable a
