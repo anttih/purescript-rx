@@ -203,3 +203,12 @@ foreign import reduce
     }
   }
   """ :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
+
+foreign import delay
+"""
+function(ms){
+  return function(ob){
+    return ob.delay(ms)
+  }
+}
+""" :: forall a. Number -> Observable a -> Observable a
