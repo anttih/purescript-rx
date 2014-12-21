@@ -3,3 +3,4 @@ output/
 .psci
 .psci_modules/
 dist/
+.bower.json
