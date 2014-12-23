@@ -1,0 +1,12 @@
+{
+  "name": "Rx Ajax example",
+  "description": "Rx Ajax example",
+  "dependencies": {
+        "purescript-rx": "*",
+        "purescript-foreign": "*",
+        "purescript-transformers": "*",
+        "purescript-either": "*",
+        "jquery": "*"
+  }
+}
+
