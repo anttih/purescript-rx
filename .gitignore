@@ -3,3 +3,5 @@ output/
 .psci
 .psci_modules/
 dist/
+.bower.json
+examples/combinators.js
