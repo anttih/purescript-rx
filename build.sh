@@ -13,7 +13,7 @@ purs_files () {
 
 case "$cmd" in
   psc)
-    purs_files | xargs psc -m Combinators --main Combinators \
+    purs_files | xargs psc -m Combinators --main=Combinators \
       --output examples/combinators.js \
       examples/Combinators.purs
   ;;

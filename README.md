@@ -28,9 +28,15 @@
 
     concat :: forall a. Observable a -> Observable a -> Observable a
 
+    debounce :: forall a. Number -> Observable a -> Observable a
+
+    delay :: forall a. Number -> Observable a -> Observable a
+
     empty :: forall a. Observable a
 
     flatMap :: forall a b. Observable a -> (a -> Observable b) -> Observable b
+
+    flatMapLatest :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 
     fromArray :: forall a. [a] -> Observable a
 
@@ -39,6 +45,8 @@
     map :: forall a b. (a -> b) -> Observable a -> Observable b
 
     merge :: forall a. Observable a -> Observable a -> Observable a
+
+    reduce :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
 
     scan :: forall a b. Observable a -> (a -> b -> b) -> b -> Observable b
 
@@ -51,6 +59,8 @@
     takeUntil :: forall a b. Observable b -> Observable a -> Observable a
 
     unwrap :: forall eff a. Observable (Eff eff a) -> Eff eff (Observable a)
+
+    zip :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
 
 
 ## Module Rx.JQuery
