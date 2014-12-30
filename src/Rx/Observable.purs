@@ -133,7 +133,7 @@ foreign import flatMapLatest
   function flatMapLatest(ob) {
     return function(f) {
       return ob.flatMapLatest(f);
-    }
+    };
   }
   """ :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 
@@ -185,8 +185,8 @@ foreign import zip
         return Rx.Observable.zip(ob1, ob2, function (x, y) {
           return f(x)(y);
         });
-      }
-    }
+      };
+    };
   }
   """ :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
 
@@ -196,10 +196,10 @@ foreign import reduce
     return function(seed){
       return function(ob){
         return ob.reduce(function (x, y) {
-            return f(x)(y);
+          return f(x)(y);
         }, seed);
-      }
-    }
+      };
+    };
   }
   """ :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
 
@@ -208,6 +208,6 @@ foreign import delay
   function delay(ms){
     return function(ob){
       return ob.delay(ms);
-    }
+    };
   }
   """ :: forall a. Number -> Observable a -> Observable a
