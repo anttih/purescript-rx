@@ -178,18 +178,17 @@ foreign import debounce
   """ :: forall a. Number -> Observable a -> Observable a
 
 foreign import zip
- """
- function zip(f){
+  """
+  function zip(f){
     return function(ob1){
       return function(ob2){
         return Rx.Observable.zip(ob1, ob2, function (x, y) {
-              return f(x)(y);
-            }
-          );
+          return f(x)(y);
+        });
       }
     }
- }
- """ :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
+  }
+  """ :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
 
 foreign import reduce
   """
@@ -198,17 +197,17 @@ foreign import reduce
       return function(ob){
         return ob.reduce(function (x, y) {
             return f(x)(y);
-          }, seed);
+        }, seed);
       }
     }
   }
   """ :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
 
 foreign import delay
-"""
-function delay(ms){
-  return function(ob){
-    return ob.delay(ms)
+  """
+  function delay(ms){
+    return function(ob){
+      return ob.delay(ms);
+    }
   }
-}
-""" :: forall a. Number -> Observable a -> Observable a
+  """ :: forall a. Number -> Observable a -> Observable a
