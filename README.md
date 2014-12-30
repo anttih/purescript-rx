@@ -1,5 +1,14 @@
 # Module Documentation
 
+## Module Rx.JQuery
+
+### Values
+
+    liveAsObservable :: forall eff a. String -> String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
+
+    onAsObservable :: forall eff a. String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
+
+
 ## Module Rx.Observable
 
 ### Types
@@ -61,22 +70,6 @@
     unwrap :: forall eff a. Observable (Eff eff a) -> Eff eff (Observable a)
 
     zip :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
-
-
-## Module Rx.JQuery
-
-### Types
-
-    data Ajax :: !
-
-
-### Values
-
-    get :: forall props eff. String -> {  | props } -> Eff (ajax :: Ajax | eff) (Observable Foreign)
-
-    liveAsObservable :: forall eff a. String -> String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
-
-    onAsObservable :: forall eff a. String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
 
 
 
