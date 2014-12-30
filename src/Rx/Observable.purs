@@ -56,7 +56,7 @@ foreign import subscribe
         return ob.subscribe(function(value) {
           f(value)();
         });
-      }
+      };
     };
   }
   """ :: forall eff a. Observable a -> (a -> Eff eff Unit) -> Eff eff Unit
@@ -66,7 +66,7 @@ foreign import merge
   function merge(ob) {
     return function(other) {
       return ob.merge(other);
-    }
+    };
   }
   """ :: forall a. Observable a -> Observable a -> Observable a
 
@@ -115,7 +115,7 @@ foreign import map
   function map(f) {
     return function(ob) {
       return ob.map(f);
-    }
+    };
   }
   """ :: forall a b. (a -> b) -> Observable a -> Observable b
 
@@ -124,7 +124,7 @@ foreign import flatMap
   function flatMap(ob) {
     return function(f) {
       return ob.flatMap(f);
-    }
+    };
   }
   """ :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 
@@ -145,7 +145,7 @@ foreign import scan
         return ob.scan(seed, function(acc, value) {
           return f(value)(acc);
         });
-      }
+      };
     };
   }
   """ :: forall a b. Observable a -> (a -> b -> b) -> b -> Observable b
