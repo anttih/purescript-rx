@@ -1,8 +1,12 @@
 {
   "name": "purescript-rx",
   "description": "RxJs bindings for PureScript",
-  "version": "0.1.0",
-  "keywords": ["purescript", "frp", "rx"],
+  "version": "0.2.0",
+  "keywords": [
+    "purescript",
+    "frp",
+    "rx"
+  ],
   "license": "MIT",
   "ignore": [
     "examples",
@@ -16,4 +20,3 @@
     "jquery": "2.1.1"
   }
 }
-
