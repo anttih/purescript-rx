@@ -182,7 +182,7 @@ foreign import zip
   function zip(f){
     return function(ob1){
       return function(ob2){
-        return Rx.Observable.zip(ob1, ob2, function (x, y) {
+        return ob1.zip(ob2, function (x, y) {
           return f(x)(y);
         });
       };
