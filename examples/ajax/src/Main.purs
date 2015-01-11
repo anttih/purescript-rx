@@ -12,6 +12,7 @@ import Control.Monad.Cont.Trans
 import Control.Monad.Trans
 import JQuery.Ajax
 import Rx.Observable
+import Rx.Observable.Cont
 
 data Person = Person String String Number
 
