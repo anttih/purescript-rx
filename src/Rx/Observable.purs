@@ -1,4 +1,25 @@
-module Rx.Observable where
+module Rx.Observable
+  ( Observable()
+  , combineLatest
+  , concat
+  , debounce
+  , delay
+  , empty
+  , flatMap
+  , fromArray
+  , flatMapLatest
+  , fromCont
+  , fromErrCont
+  , merge
+  , reduce
+  , scan
+  , subscribe
+  , switchLatest
+  , take
+  , takeUntil
+  , unwrap
+  , zip
+  ) where
 
 import Prelude
 import Control.Monad.Eff

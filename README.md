@@ -49,9 +49,9 @@
 
     fromArray :: forall a. [a] -> Observable a
 
-    just :: forall a. a -> Observable a
+    fromCont :: forall eff a. ContT Unit (Eff eff) a -> Eff eff (Observable a)
 
-    map :: forall a b. (a -> b) -> Observable a -> Observable b
+    fromErrCont :: forall eff e a. ErrorT e (ContT Unit (Eff eff)) a -> Eff eff (ErrorT e Observable a)
 
     merge :: forall a. Observable a -> Observable a -> Observable a
 
