@@ -70,11 +70,19 @@
 
 ## Module Rx.Observable.Cont
 
+### Types
+
+    data Event err a where
+      OnError :: err -> Event err a
+      OnNext :: a -> Event err a
+      OnCompleted :: Event err a
+
+
 ### Values
 
-    fromCont :: forall eff a. ContT Unit (Eff eff) a -> Eff eff (Observable a)
+    fromCont :: forall eff e a. (Error e) => ContT Unit (Eff eff) (Event e a) -> Eff eff (ErrorT e Observable a)
 
-    fromErrCont :: forall eff e a. ErrorT e (ContT Unit (Eff eff)) a -> Eff eff (ErrorT e Observable a)
+    fromErrCont :: forall eff e a. (Error e) => ErrorT e (ContT Unit (Eff eff)) a -> Eff eff (ErrorT e Observable a)
 
 
 
