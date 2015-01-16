@@ -44,7 +44,7 @@ tryPerson = catch failPerson (\_ -> getPerson)
 
 main = do
   person <- fromErrCont tryPerson
-  subscribe (runErrorT person) (either showTrace handleOk)
-    where
-      handleOk = either showTrace showTrace
-
+  personStream <- return $ runErrorT person
+  subscribeOnCompleted personStream $ const $ trace "OnCompleted"
+  subscribe personStream (either showTrace handleOk)
+    where handleOk = either showTrace showTrace

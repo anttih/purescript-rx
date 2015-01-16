@@ -12,6 +12,7 @@ module Rx.Observable
   , reduce
   , scan
   , subscribe
+  , subscribeOnCompleted
   , switchLatest
   , take
   , takeUntil
@@ -79,6 +80,19 @@ foreign import subscribe
     };
   }
   """ :: forall eff a. Observable a -> (a -> Eff eff Unit) -> Eff eff Unit
+
+foreign import subscribeOnCompleted
+  """
+  function subscribeOnCompleted(ob) {
+    return function(f) {
+      return function() {
+        return ob.subscribeOnCompleted(function(value) {
+          f(value)();
+        });
+      };
+    };
+  }
+  """ :: forall eff a. Observable a -> (Unit -> Eff eff Unit) -> Eff eff Unit
 
 foreign import merge
   """
