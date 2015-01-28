@@ -26,7 +26,7 @@ import DOM
 
 foreign import data Observable :: * -> *
 
-instance observableFunctor :: Functor Observable where
+instance functorObservable :: Functor Observable where
   (<$>) = map
 
 instance applyObservable :: Apply Observable where

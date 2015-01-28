@@ -14,6 +14,8 @@
   ],
   "dependencies": {
     "purescript-transformers": "*",
+    "purescript-foldable-traversable": "0.2.1",
+    "purescript-control": "0.2.1",
     "purescript-jquery": "0.2.3",
     "purescript-dom": "0.1.1",
     "rxjs": "2.3.18",
