@@ -4,7 +4,6 @@ module Rx.Observable
   , concat
   , debounce
   , delay
-  , empty
   , flatMap
   , fromArray
   , flatMapLatest
@@ -12,6 +11,7 @@ module Rx.Observable
   , reduce
   , scan
   , subscribe
+  , subscribeOnCompleted
   , switchLatest
   , take
   , takeUntil
@@ -19,13 +19,16 @@ module Rx.Observable
   , zip
   ) where
 
-import Prelude
+import Control.Alt
+import Control.Plus
+import Control.MonadPlus
+import Control.Alternative
 import Control.Monad.Eff
 import DOM
 
 foreign import data Observable :: * -> *
 
-instance observableFunctor :: Functor Observable where
+instance functorObservable :: Functor Observable where
   (<$>) = map
 
 instance applyObservable :: Apply Observable where
@@ -42,6 +45,16 @@ instance monadObservable :: Monad Observable
 instance semigroupObservable :: Semigroup (Observable a) where
   (<>) = concat
 
+instance altObservable :: Alt Observable where
+  (<|>) = merge
+
+instance plusObservable :: Plus Observable where
+  empty = empty'
+
+instance alternativeObservable :: Alternative Observable
+
+instance monadPlusObservable :: MonadPlus Observable
+
 foreign import just
   """
   function just(x) {
@@ -56,9 +69,9 @@ foreign import fromArray
   }
   """ :: forall a. [a] -> Observable a
 
-foreign import empty
+foreign import empty'
   """
-  var empty = (function () {
+  var empty$prime = (function () {
     if (!Rx) {
       return {};
     } else {
@@ -79,6 +92,19 @@ foreign import subscribe
     };
   }
   """ :: forall eff a. Observable a -> (a -> Eff eff Unit) -> Eff eff Unit
+
+foreign import subscribeOnCompleted
+  """
+  function subscribeOnCompleted(ob) {
+    return function(f) {
+      return function() {
+        return ob.subscribeOnCompleted(function(value) {
+          f(value)();
+        });
+      };
+    };
+  }
+  """ :: forall eff a. Observable a -> (Unit -> Eff eff Unit) -> Eff eff Unit
 
 foreign import merge
   """
