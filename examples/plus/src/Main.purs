@@ -4,7 +4,6 @@ import Debug.Trace
 import Data.Tuple (Tuple(..))
 import Data.Maybe
 import Rx.Observable
-import Rx.Observable.Plus
 import Control.MonadPlus.Partial
 
 main = do

@@ -4,7 +4,6 @@ module Rx.Observable
   , concat
   , debounce
   , delay
-  , empty
   , flatMap
   , fromArray
   , flatMapLatest
@@ -20,7 +19,10 @@ module Rx.Observable
   , zip
   ) where
 
-import Prelude
+import Control.Alt
+import Control.Plus
+import Control.MonadPlus
+import Control.Alternative
 import Control.Monad.Eff
 import DOM
 
@@ -43,6 +45,16 @@ instance monadObservable :: Monad Observable
 instance semigroupObservable :: Semigroup (Observable a) where
   (<>) = concat
 
+instance altObservable :: Alt Observable where
+  (<|>) = merge
+
+instance plusObservable :: Plus Observable where
+  empty = empty'
+
+instance alternativeObservable :: Alternative Observable
+
+instance monadPlusObservable :: MonadPlus Observable
+
 foreign import just
   """
   function just(x) {
@@ -57,9 +69,9 @@ foreign import fromArray
   }
   """ :: forall a. [a] -> Observable a
 
-foreign import empty
+foreign import empty'
   """
-  var empty = (function () {
+  var empty$prime = (function () {
     if (!Rx) {
       return {};
     } else {
