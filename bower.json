@@ -13,16 +13,13 @@
     "build.sh"
   ],
   "dependencies": {
-    "purescript-transformers": "*",
+    "purescript-transformers": "0.4.0",
     "purescript-foldable-traversable": "0.2.1",
     "purescript-control": "0.2.1",
     "purescript-jquery": "0.2.3",
     "purescript-dom": "0.1.1",
-    "rxjs": "2.3.18",
+    "rxjs": "2.3.25",
     "rxjs-jquery": "1.1.7",
-    "jquery": "2.1.1"
-  },
-  "resolutions": {
-    "purescript-arrays": "~0.3.0"
+    "jquery": "2.1.3"
   }
 }
