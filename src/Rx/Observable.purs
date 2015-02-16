@@ -4,6 +4,9 @@ module Rx.Observable
   , concat
   , debounce
   , delay
+  , distinct
+  , distinctUntilChanged
+  , filter
   , flatMap
   , fromArray
   , flatMapLatest
@@ -256,3 +259,26 @@ foreign import delay
     };
   }
   """ :: forall a. Number -> Observable a -> Observable a
+
+foreign import distinct
+  """
+  function distinct(ob){
+    return ob.distinct();
+  }
+  """ :: forall a. Observable a -> Observable a
+
+foreign import distinctUntilChanged
+  """
+  function distinctUntilChanged(ob){
+    return ob.distinctUntilChanged();
+  }
+  """ :: forall a. Observable a -> Observable a
+
+foreign import filter
+  """
+  function filter(p){
+    return function(ob){
+      return ob.filter(p);
+    };
+  }
+  """ :: forall a. (a -> Boolean) -> Observable a -> Observable a
