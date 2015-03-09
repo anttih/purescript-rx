@@ -61,6 +61,7 @@ instance monadPlusObservable :: MonadPlus Observable
 foreign import just
   """
   function just(x) {
+    var Rx = require('Rx');
     return Rx.Observable.just(x);
   }
   """ :: forall a. a -> Observable a
@@ -68,19 +69,15 @@ foreign import just
 foreign import fromArray
   """
   function fromArray(xs) {
+    var Rx = require('Rx');
     return Rx.Observable.fromArray(xs);
   }
   """ :: forall a. [a] -> Observable a
 
 foreign import empty'
   """
-  var empty$prime = (function () {
-    if (!Rx) {
-      return {};
-    } else {
-      return Rx.Observable.empty();
-    }
-  }());
+  var Rx = require('Rx');
+  var empty$prime = Rx.Observable.empty();
   """ :: forall a. Observable a
 
 foreign import subscribe
