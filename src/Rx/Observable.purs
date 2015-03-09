@@ -10,8 +10,10 @@ module Rx.Observable
   , flatMap
   , fromArray
   , flatMapLatest
+  , generate
   , merge
   , reduce
+  , range
   , scan
   , subscribe
   , subscribeOnCompleted
@@ -79,6 +81,20 @@ foreign import empty'
   var Rx = require('Rx');
   var empty$prime = Rx.Observable.empty();
   """ :: forall a. Observable a
+
+foreign import generate
+  """
+  function generate(initial) {
+    return function (condition) {
+      return function (step) {
+        return function (selector) {
+          var Rx = require('Rx');
+          return Rx.Observable.generate(initial, condition, step, selector);
+        };
+      };
+    };
+  }
+  """ :: forall a b. a -> (a -> Boolean) -> (a -> a) -> (a -> b) -> Observable b
 
 foreign import subscribe
   """
@@ -234,6 +250,16 @@ foreign import zip
     };
   }
   """ :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
+
+foreign import range
+  """
+  function range(begin) {
+    return function (end) {
+      var Rx = require('Rx');
+      return Rx.Observable.range(begin, end);
+    };
+  }
+  """ :: Number -> Number -> Observable Number
 
 foreign import reduce
   """
