@@ -25,6 +25,8 @@ onAsObservable :: forall eff a. String -> JQuery -> Eff (dom :: DOM | eff) (Obse
 data Observable :: * -> *
 ```
 
+A type which represents streams of discrete events. Please see
+[RxJs API documentation]() for more more examples.
 
 #### `functorObservable`
 
@@ -53,6 +55,9 @@ instance applicativeObservable :: Applicative Observable
 instance observableBind :: Bind Observable
 ```
 
+**Note** that we use `flatMapLatest` here instead of `flatMap`. In the browser
+environment this is usually what you want. You may use plain `flapMap`
+which is exported as well.
 
 #### `monadObservable`
 

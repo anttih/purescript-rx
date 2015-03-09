@@ -32,6 +32,9 @@ import Control.Alternative
 import Control.Monad.Eff
 import DOM
 
+-- | A type which represents streams of discrete events. Please see
+-- | [RxJs API documentation]() for more more examples.
+
 foreign import data Observable :: * -> *
 
 instance functorObservable :: Functor Observable where
@@ -43,6 +46,9 @@ instance applyObservable :: Apply Observable where
 instance applicativeObservable :: Applicative Observable where
   pure = just
 
+-- | **Note** that we use `flatMapLatest` here instead of `flatMap`. In the browser
+-- | environment this is usually what you want. You may use plain `flapMap`
+-- | which is exported as well.
 instance observableBind :: Bind Observable where
   (>>=) = flatMapLatest
 
