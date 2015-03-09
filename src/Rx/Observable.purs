@@ -9,7 +9,6 @@ module Rx.Observable
   , filter
   , flatMap
   , fromArray
-  , flatMapLatest
   , generate
   , merge
   , reduce

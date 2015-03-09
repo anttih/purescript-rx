@@ -171,13 +171,6 @@ flatMap :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 ```
 
 
-#### `flatMapLatest`
-
-``` purescript
-flatMapLatest :: forall a b. Observable a -> (a -> Observable b) -> Observable b
-```
-
-
 #### `scan`
 
 ``` purescript
