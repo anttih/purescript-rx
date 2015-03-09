@@ -22,6 +22,7 @@ module Rx.Observable
   , takeUntil
   , unwrap
   , zip
+  , withLatestFrom
   ) where
 
 import Control.Alt
@@ -305,3 +306,16 @@ foreign import filter
     };
   }
   """ :: forall a. (a -> Boolean) -> Observable a -> Observable a
+
+foreign import withLatestFrom
+  """
+  function withLatestFrom(f) {
+    return function (ob1) {
+      return function (ob2) {
+        return ob1.withLatestFrom(ob2, function(x, y) {
+          return f(x)(y);
+        })
+      };
+    };
+  }
+  """ :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
