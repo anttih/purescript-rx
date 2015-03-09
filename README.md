@@ -2,173 +2,287 @@
 
 ## Module Rx.JQuery
 
-### Values
-
 #### `liveAsObservable`
 
-    liveAsObservable :: forall eff a. String -> String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
+``` purescript
+liveAsObservable :: forall eff a. String -> String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
+```
+
 
 #### `onAsObservable`
 
-    onAsObservable :: forall eff a. String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
+``` purescript
+onAsObservable :: forall eff a. String -> JQuery -> Eff (dom :: DOM | eff) (Observable JQueryEvent)
+```
+
 
 
 ## Module Rx.Observable
 
-### Types
-
 #### `Observable`
 
-    data Observable :: * -> *
+``` purescript
+data Observable :: * -> *
+```
 
-
-### Type Class Instances
-
-#### `altObservable`
-
-    instance altObservable :: Alt Observable
-
-#### `alternativeObservable`
-
-    instance alternativeObservable :: Alternative Observable
-
-#### `applicativeObservable`
-
-    instance applicativeObservable :: Applicative Observable
-
-#### `applyObservable`
-
-    instance applyObservable :: Apply Observable
 
 #### `functorObservable`
 
-    instance functorObservable :: Functor Observable
+``` purescript
+instance functorObservable :: Functor Observable
+```
 
-#### `monadObservable`
 
-    instance monadObservable :: Monad Observable
+#### `applyObservable`
 
-#### `monadPlusObservable`
+``` purescript
+instance applyObservable :: Apply Observable
+```
 
-    instance monadPlusObservable :: MonadPlus Observable
+
+#### `applicativeObservable`
+
+``` purescript
+instance applicativeObservable :: Applicative Observable
+```
+
 
 #### `observableBind`
 
-    instance observableBind :: Bind Observable
+``` purescript
+instance observableBind :: Bind Observable
+```
 
-#### `plusObservable`
 
-    instance plusObservable :: Plus Observable
+#### `monadObservable`
+
+``` purescript
+instance monadObservable :: Monad Observable
+```
+
 
 #### `semigroupObservable`
 
-    instance semigroupObservable :: Semigroup (Observable a)
+``` purescript
+instance semigroupObservable :: Semigroup (Observable a)
+```
 
 
-### Values
+#### `altObservable`
 
-#### `combineLatest`
+``` purescript
+instance altObservable :: Alt Observable
+```
 
-    combineLatest :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
 
-#### `concat`
+#### `plusObservable`
 
-    concat :: forall a. Observable a -> Observable a -> Observable a
+``` purescript
+instance plusObservable :: Plus Observable
+```
 
-#### `debounce`
 
-    debounce :: forall a. Number -> Observable a -> Observable a
+#### `alternativeObservable`
 
-#### `delay`
+``` purescript
+instance alternativeObservable :: Alternative Observable
+```
 
-    delay :: forall a. Number -> Observable a -> Observable a
 
-#### `distinct`
+#### `monadPlusObservable`
 
-    distinct :: forall a. Observable a -> Observable a
+``` purescript
+instance monadPlusObservable :: MonadPlus Observable
+```
 
-#### `distinctUntilChanged`
-
-    distinctUntilChanged :: forall a. Observable a -> Observable a
-
-#### `filter`
-
-    filter :: forall a. (a -> Boolean) -> Observable a -> Observable a
-
-#### `flatMap`
-
-    flatMap :: forall a b. Observable a -> (a -> Observable b) -> Observable b
-
-#### `flatMapLatest`
-
-    flatMapLatest :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 
 #### `fromArray`
 
-    fromArray :: forall a. [a] -> Observable a
+``` purescript
+fromArray :: forall a. [a] -> Observable a
+```
 
-#### `merge`
 
-    merge :: forall a. Observable a -> Observable a -> Observable a
+#### `generate`
 
-#### `reduce`
+``` purescript
+generate :: forall a b. a -> (a -> Boolean) -> (a -> a) -> (a -> b) -> Observable b
+```
 
-    reduce :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
-
-#### `scan`
-
-    scan :: forall a b. Observable a -> (a -> b -> b) -> b -> Observable b
 
 #### `subscribe`
 
-    subscribe :: forall eff a. Observable a -> (a -> Eff eff Unit) -> Eff eff Unit
+``` purescript
+subscribe :: forall eff a. Observable a -> (a -> Eff eff Unit) -> Eff eff Unit
+```
+
 
 #### `subscribeOnCompleted`
 
-    subscribeOnCompleted :: forall eff a. Observable a -> (Unit -> Eff eff Unit) -> Eff eff Unit
+``` purescript
+subscribeOnCompleted :: forall eff a. Observable a -> (Unit -> Eff eff Unit) -> Eff eff Unit
+```
 
-#### `switchLatest`
 
-    switchLatest :: forall a. Observable (Observable a) -> Observable a
+#### `merge`
+
+``` purescript
+merge :: forall a. Observable a -> Observable a -> Observable a
+```
+
+
+#### `combineLatest`
+
+``` purescript
+combineLatest :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
+```
+
+
+#### `concat`
+
+``` purescript
+concat :: forall a. Observable a -> Observable a -> Observable a
+```
+
 
 #### `take`
 
-    take :: forall a. Number -> Observable a -> Observable a
+``` purescript
+take :: forall a. Number -> Observable a -> Observable a
+```
+
 
 #### `takeUntil`
 
-    takeUntil :: forall a b. Observable b -> Observable a -> Observable a
+``` purescript
+takeUntil :: forall a b. Observable b -> Observable a -> Observable a
+```
+
+
+#### `flatMap`
+
+``` purescript
+flatMap :: forall a b. Observable a -> (a -> Observable b) -> Observable b
+```
+
+
+#### `flatMapLatest`
+
+``` purescript
+flatMapLatest :: forall a b. Observable a -> (a -> Observable b) -> Observable b
+```
+
+
+#### `scan`
+
+``` purescript
+scan :: forall a b. Observable a -> (a -> b -> b) -> b -> Observable b
+```
+
 
 #### `unwrap`
 
-    unwrap :: forall eff a. Observable (Eff eff a) -> Eff eff (Observable a)
+``` purescript
+unwrap :: forall eff a. Observable (Eff eff a) -> Eff eff (Observable a)
+```
+
+
+#### `switchLatest`
+
+``` purescript
+switchLatest :: forall a. Observable (Observable a) -> Observable a
+```
+
+
+#### `debounce`
+
+``` purescript
+debounce :: forall a. Number -> Observable a -> Observable a
+```
+
 
 #### `zip`
 
-    zip :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
+``` purescript
+zip :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
+```
+
+
+#### `range`
+
+``` purescript
+range :: Number -> Number -> Observable Number
+```
+
+
+#### `reduce`
+
+``` purescript
+reduce :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
+```
+
+
+#### `delay`
+
+``` purescript
+delay :: forall a. Number -> Observable a -> Observable a
+```
+
+
+#### `distinct`
+
+``` purescript
+distinct :: forall a. Observable a -> Observable a
+```
+
+
+#### `distinctUntilChanged`
+
+``` purescript
+distinctUntilChanged :: forall a. Observable a -> Observable a
+```
+
+
+#### `filter`
+
+``` purescript
+filter :: forall a. (a -> Boolean) -> Observable a -> Observable a
+```
+
+
+#### `withLatestFrom`
+
+``` purescript
+withLatestFrom :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
+```
+
 
 
 ## Module Rx.Observable.Cont
 
-### Types
-
 #### `Event`
 
-    data Event err a
-      = OnError err
-      | OnNext a
-      | OnCompleted 
+``` purescript
+data Event err a
+  = OnError err
+  | OnNext a
+  | OnCompleted 
+```
 
-
-### Values
 
 #### `fromCont`
 
-    fromCont :: forall eff e a. (Error e) => ContT Unit (Eff eff) (Event e a) -> Eff eff (ErrorT e Observable a)
+``` purescript
+fromCont :: forall eff e a. (Error e) => ContT Unit (Eff eff) (Event e a) -> Eff eff (ErrorT e Observable a)
+```
+
 
 #### `fromErrCont`
 
-    fromErrCont :: forall eff e a. (Error e) => ErrorT e (ContT Unit (Eff eff)) a -> Eff eff (ErrorT e Observable a)
+``` purescript
+fromErrCont :: forall eff e a. (Error e) => ErrorT e (ContT Unit (Eff eff)) a -> Eff eff (ErrorT e Observable a)
+```
+
 
 
 
