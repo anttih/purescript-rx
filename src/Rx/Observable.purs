@@ -46,11 +46,8 @@ instance applyObservable :: Apply Observable where
 instance applicativeObservable :: Applicative Observable where
   pure = just
 
--- | **Note** that we use `flatMapLatest` here instead of `flatMap`. In the browser
--- | environment this is usually what you want. You may use plain `flapMap`
--- | which is exported as well.
 instance observableBind :: Bind Observable where
-  (>>=) = flatMapLatest
+  (>>=) = flatMap
 
 instance monadObservable :: Monad Observable
 

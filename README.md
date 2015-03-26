@@ -55,9 +55,6 @@ instance applicativeObservable :: Applicative Observable
 instance observableBind :: Bind Observable
 ```
 
-**Note** that we use `flatMapLatest` here instead of `flatMap`. In the browser
-environment this is usually what you want. You may use plain `flapMap`
-which is exported as well.
 
 #### `monadObservable`
 
