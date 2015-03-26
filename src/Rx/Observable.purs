@@ -8,6 +8,7 @@ module Rx.Observable
   , distinctUntilChanged
   , filter
   , flatMap
+  , flatMapLatest
   , fromArray
   , generate
   , merge
