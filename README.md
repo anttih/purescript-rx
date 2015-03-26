@@ -174,7 +174,7 @@ flatMap :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 #### `scan`
 
 ``` purescript
-scan :: forall a b. Observable a -> (a -> b -> b) -> b -> Observable b
+scan :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
 ```
 
 

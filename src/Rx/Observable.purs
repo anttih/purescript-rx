@@ -206,16 +206,16 @@ foreign import flatMapLatest
 
 foreign import scan
   """
-  function scan(ob) {
-    return function(f) {
-      return function(seed) {
+  function scan(f) {
+    return function(seed) {
+      return function(ob) {
         return ob.scan(seed, function(acc, value) {
           return f(value)(acc);
         });
       };
     };
   }
-  """ :: forall a b. Observable a -> (a -> b -> b) -> b -> Observable b
+  """ :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
 
 foreign import unwrap
   """
