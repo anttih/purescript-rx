@@ -13,6 +13,7 @@ module Rx.Observable
   , merge
   , reduce
   , range
+  , runObservable
   , scan
   , subscribe
   , subscribeOnCompleted
@@ -227,6 +228,17 @@ foreign import unwrap
     };
   }
   """ :: forall eff a. Observable (Eff eff a) -> Eff eff (Observable a)
+
+foreign import runObservable
+  """
+  function runObservable(ob) {
+    return function() {
+      ob.subscribe(function(eff) {
+        eff();
+      });
+    };
+  }
+  """ :: forall eff. Observable (Eff eff Unit) -> Eff eff Unit
 
 foreign import switchLatest
   """

@@ -185,6 +185,13 @@ unwrap :: forall eff a. Observable (Eff eff a) -> Eff eff (Observable a)
 ```
 
 
+#### `runObservable`
+
+``` purescript
+runObservable :: forall eff. Observable (Eff eff Unit) -> Eff eff Unit
+```
+
+
 #### `switchLatest`
 
 ``` purescript
