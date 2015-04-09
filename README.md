@@ -26,7 +26,8 @@ data Observable :: * -> *
 ```
 
 A type which represents streams of discrete events. Please see
-[RxJs API documentation]() for more more examples.
+[RxJS API documentation](https://github.com/Reactive-Extensions/RxJS/tree/master/doc)
+for more more examples.
 
 #### `functorObservable`
 
@@ -165,6 +166,13 @@ takeUntil :: forall a b. Observable b -> Observable a -> Observable a
 
 ``` purescript
 flatMap :: forall a b. Observable a -> (a -> Observable b) -> Observable b
+```
+
+
+#### `flatMapLatest`
+
+``` purescript
+flatMapLatest :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 ```
 
 

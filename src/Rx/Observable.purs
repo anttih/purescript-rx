@@ -34,7 +34,8 @@ import Control.Monad.Eff
 import DOM
 
 -- | A type which represents streams of discrete events. Please see
--- | [RxJs API documentation]() for more more examples.
+-- | [RxJS API documentation](https://github.com/Reactive-Extensions/RxJS/tree/master/doc)
+-- | for more more examples.
 
 foreign import data Observable :: * -> *
 
