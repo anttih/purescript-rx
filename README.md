@@ -268,6 +268,16 @@ withLatestFrom :: forall a b c. (a -> b -> c) -> Observable a -> Observable b ->
 
 
 
+## Module Rx.Observable.Aff
+
+#### `liftAff`
+
+``` purescript
+liftAff :: forall eff err a. Aff eff a -> Eff eff (Observable a)
+```
+
+
+
 ## Module Rx.Observable.Cont
 
 #### `Event`
@@ -292,7 +302,3 @@ fromCont :: forall eff e a. (Error e) => ContT Unit (Eff eff) (Event e a) -> Eff
 ``` purescript
 fromErrCont :: forall eff e a. (Error e) => ErrorT e (ContT Unit (Eff eff)) a -> Eff eff (ErrorT e Observable a)
 ```
-
-
-
-

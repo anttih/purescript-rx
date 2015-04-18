@@ -18,3 +18,7 @@ main = do
   subscribe (reduce (+) 0 (zip (+) a b)) $ trace <<< show
 
   subscribe (delay 1000 a) $ trace <<< show
+
+  v <- liftAff $ pure "hello"
+  runObservable $ trace <$> v
+  
