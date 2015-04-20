@@ -2,6 +2,7 @@ bower_components/
 output/
 .psci
 .psci_modules/
+node_modules/
 dist/
 .bower.json
 examples/combinators.js

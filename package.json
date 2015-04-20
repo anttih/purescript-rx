@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "dependencies": {
+    "grunt": "~0.4.5",
+    "grunt-purescript": "~0.6.0",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-jsvalidate": "~0.2.2",
+    "rx": "*"
+  },
+  "devDependencies": {
+    "browserify": "^9.0.8",
+    "grunt-browserify": "^3.7.0"
+  }
+}

@@ -1,7 +1,9 @@
-module Combinators where
+module Examples where
 
 import Debug.Trace
+
 import Rx.Observable
+import Rx.Observable.Aff
 
 main = do
   a <- return $ fromArray [1,2,3]
