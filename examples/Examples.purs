@@ -1,5 +1,8 @@
 module Examples where
 
+import Control.MonadPlus.Partial
+import Data.Tuple (Tuple(..))
+import Data.Maybe
 import Debug.Trace
 
 import Rx.Observable
@@ -22,3 +25,13 @@ main = do
   v <- liftAff $ pure "hello"
   runObservable $ trace <$> v
   
+  -- Plus
+  (Tuple smaller bigger) <- return $ mpartition ((>) 5) (fromArray [2,3,4,5,6,8,9,10,100])
+
+  trace "smaller:"
+  subscribe smaller $ trace <<< show
+
+  trace "bigger:"
+  subscribe bigger $ trace <<< show
+
+  subscribe (mcatMaybes $ fromArray [Just 1, Just 2, Nothing, Just 4]) $ trace <<< show
