@@ -9,6 +9,7 @@ import Debug.Trace
 
 import Rx.Observable
 import Rx.Observable.Aff
+import Rx.Observable.Cont (Event(..), liftCont)
 
 main = do
   a <- return $ fromArray [1,2,3]
@@ -35,6 +36,14 @@ main = do
   affE <- liftAff $ throwError $ error "This is an Aff error"
   subscribe (catchError affE (pure <<< message)) trace
   
+  -- ContT
+  
+  c <- liftCont $ pure (OnNext "hello from ContT")
+  subscribe c trace
+
+  contE <- liftCont $ pure (OnError (error "error from ContT"))
+  subscribe (catchError contE (pure <<< message)) trace
+
   -- Plus
   (Tuple smaller bigger) <- return $ mpartition ((>) 5) (fromArray [2,3,4,5,6,8,9,10,100])
 

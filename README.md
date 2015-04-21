@@ -290,22 +290,15 @@ liftAff :: forall eff err a. Aff eff a -> Eff eff (Observable a)
 #### `Event`
 
 ``` purescript
-data Event err a
-  = OnError err
+data Event a
+  = OnError Error
   | OnNext a
   | OnCompleted 
 ```
 
 
-#### `fromCont`
+#### `liftCont`
 
 ``` purescript
-fromCont :: forall eff e a. (Error e) => ContT Unit (Eff eff) (Event e a) -> Eff eff (ErrorT e Observable a)
-```
-
-
-#### `fromErrCont`
-
-``` purescript
-fromErrCont :: forall eff e a. (Error e) => ErrorT e (ContT Unit (Eff eff)) a -> Eff eff (ErrorT e Observable a)
+liftCont :: forall eff a. ContT Unit (Eff eff) (Event a) -> Eff eff (Observable a)
 ```
