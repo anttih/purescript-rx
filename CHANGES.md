@@ -1,3 +1,24 @@
+## v0.5.0
+
+### Breaking changes
+
+* Changes in ContT support:
+  * Rename `fromCont` to `liftCont`
+  * Event type now has a fixed type for errors: a javascript error. This is now
+    possible because `Observable` implements `MonadError`.
+  * `liftCont` now passes OnError events as Observable errors
+  * Removed `fromErrCont` to keep the API simple
+
+### New features
+
+* Add `MonadError` instance
+* Add Aff support (`liftAff`)
+
+### Other stuff
+
+* Use grunt again and compile examples by default
+
+
 ## v0.4.0
 
 ### Breaking changes
@@ -13,5 +34,3 @@
 * Add `generate` and `range`
 * Add `withLatestFrom`
 * Add `runObservable`
-
-
