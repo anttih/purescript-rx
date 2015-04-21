@@ -1,6 +1,8 @@
 module Examples where
 
 import Control.MonadPlus.Partial
+import Control.Monad.Error.Class
+import Control.Monad.Eff.Exception (message, error)
 import Data.Tuple (Tuple(..))
 import Data.Maybe
 import Debug.Trace
@@ -22,8 +24,16 @@ main = do
 
   subscribe (delay 1000 a) $ trace <<< show
 
+  -- MonadError
+  let err = throwError $ error "This is an error"
+  subscribe (catchError err (pure <<< message)) trace
+
+  -- Aff
   v <- liftAff $ pure "hello"
   runObservable $ trace <$> v
+
+  affE <- liftAff $ throwError $ error "This is an Aff error"
+  subscribe (catchError affE (pure <<< message)) trace
   
   -- Plus
   (Tuple smaller bigger) <- return $ mpartition ((>) 5) (fromArray [2,3,4,5,6,8,9,10,100])

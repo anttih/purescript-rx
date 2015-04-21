@@ -99,6 +99,13 @@ instance monadPlusObservable :: MonadPlus Observable
 ```
 
 
+#### `monadErrorObservable`
+
+``` purescript
+instance monadErrorObservable :: MonadError Error Observable
+```
+
+
 #### `fromArray`
 
 ``` purescript

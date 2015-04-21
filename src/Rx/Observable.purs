@@ -29,8 +29,11 @@ module Rx.Observable
 import Control.Alt
 import Control.Plus
 import Control.MonadPlus
+import Control.Monad.Eff.Exception (Error())
+import Control.Monad.Error.Class
 import Control.Alternative
 import Control.Monad.Eff
+import Data.Function(Fn2(), runFn2)
 import DOM
 
 -- | A type which represents streams of discrete events. Please see
@@ -65,6 +68,11 @@ instance plusObservable :: Plus Observable where
 instance alternativeObservable :: Alternative Observable
 
 instance monadPlusObservable :: MonadPlus Observable
+
+instance monadErrorObservable :: MonadError Error Observable where
+  catchError = runFn2 _catchError
+  throwError = _throwError
+
 
 foreign import just
   """
@@ -335,3 +343,18 @@ foreign import withLatestFrom
     };
   }
   """ :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
+
+foreign import _throwError
+  """
+  function _throwError(e) {
+    var Rx = require('rx');
+    return Rx.Observable.throw(e)
+  }
+  """ :: forall a. Error -> Observable a
+
+foreign import _catchError
+  """
+  function _catchError(ob, f) {
+    return ob.catch(f);
+  }
+  """ :: forall a. Fn2 (Observable a) (Error -> Observable a) (Observable a)
