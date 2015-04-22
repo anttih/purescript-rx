@@ -63,7 +63,7 @@ instance altObservable :: Alt Observable where
   (<|>) = merge
 
 instance plusObservable :: Plus Observable where
-  empty = empty'
+  empty = _empty
 
 instance alternativeObservable :: Alternative Observable
 
@@ -90,10 +90,10 @@ foreign import fromArray
   }
   """ :: forall a. [a] -> Observable a
 
-foreign import empty'
+foreign import _empty
   """
   var Rx = require('rx');
-  var empty$prime = Rx.Observable.empty();
+  var _empty = Rx.Observable.empty();
   """ :: forall a. Observable a
 
 foreign import generate
