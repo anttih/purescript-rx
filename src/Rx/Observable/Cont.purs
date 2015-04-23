@@ -1,21 +1,16 @@
 module Rx.Observable.Cont
-  ( Event(..)
-  , liftCont
+  ( liftCont
   )
   where
 
 import Control.Monad.Eff
 import Control.Monad.Trans
-import Control.Monad.Error
 import Control.Monad.Cont.Trans
-import Control.Monad.Eff.Exception (Error())
-import Control.Monad.Error.Trans
 import Data.Either
 import Rx.Observable
+import Rx.Notification
 
-data Event a = OnError Error | OnNext a | OnCompleted
-
-liftCont :: forall eff a. ContT Unit (Eff eff) (Event a) -> Eff eff (Observable a)
+liftCont :: forall eff a. ContT Unit (Eff eff) (Notification a) -> Eff eff (Observable a)
 liftCont (ContT f) = _liftCont f
 
 foreign import _liftCont
@@ -37,4 +32,4 @@ foreign import _liftCont
       }).publishLast().refCount();
     };
   }
-  """ :: forall eff a. (((Event a) -> Eff eff Unit) -> Eff eff Unit) -> Eff eff (Observable a)
+  """ :: forall eff a. (((Notification a) -> Eff eff Unit) -> Eff eff Unit) -> Eff eff (Observable a)

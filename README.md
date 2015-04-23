@@ -17,6 +17,19 @@ onAsObservable :: forall eff a. String -> JQuery -> Eff (dom :: DOM | eff) (Obse
 
 
 
+## Module Rx.Notification
+
+#### `Notification`
+
+``` purescript
+data Notification a
+  = OnError Error
+  | OnNext a
+  | OnCompleted 
+```
+
+
+
 ## Module Rx.Observable
 
 #### `Observable`
@@ -301,18 +314,8 @@ liftAff :: forall eff err a. Aff eff a -> Eff eff (Observable a)
 
 ## Module Rx.Observable.Cont
 
-#### `Event`
-
-``` purescript
-data Event a
-  = OnError Error
-  | OnNext a
-  | OnCompleted 
-```
-
-
 #### `liftCont`
 
 ``` purescript
-liftCont :: forall eff a. ContT Unit (Eff eff) (Event a) -> Eff eff (Observable a)
+liftCont :: forall eff a. ContT Unit (Eff eff) (Notification a) -> Eff eff (Observable a)
 ```

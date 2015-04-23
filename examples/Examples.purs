@@ -7,9 +7,10 @@ import Data.Tuple (Tuple(..))
 import Data.Maybe
 import Debug.Trace
 
+import Rx.Notification
 import Rx.Observable
 import Rx.Observable.Aff
-import Rx.Observable.Cont (Event(..), liftCont)
+import Rx.Observable.Cont (liftCont)
 
 main = do
   a <- return $ fromArray [1,2,3]
