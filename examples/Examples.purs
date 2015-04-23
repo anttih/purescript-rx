@@ -28,6 +28,7 @@ main = do
   -- MonadError
   let err = throwError $ error "This is an error"
   subscribe (catchError err (pure <<< message)) trace
+  subscribeOnError err (trace <<< message)
 
   -- Aff
   v <- liftAff $ pure "hello"

@@ -18,6 +18,7 @@ module Rx.Observable
   , scan
   , subscribe
   , subscribeOnCompleted
+  , subscribeOnError
   , switchLatest
   , take
   , takeUntil
@@ -135,6 +136,19 @@ foreign import subscribeOnCompleted
     };
   }
   """ :: forall eff a. Observable a -> (Unit -> Eff eff Unit) -> Eff eff Unit
+
+foreign import subscribeOnError
+  """
+  function subscribeOnError(ob) {
+    return function(f) {
+      return function() {
+        return ob.subscribeOnError(function(err) {
+          f(err)();
+        });
+      };
+    };
+  }
+  """ :: forall eff a. Observable a -> (Error -> Eff eff Unit) -> Eff eff Unit
 
 foreign import merge
   """

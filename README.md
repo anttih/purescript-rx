@@ -134,6 +134,13 @@ subscribeOnCompleted :: forall eff a. Observable a -> (Unit -> Eff eff Unit) -> 
 ```
 
 
+#### `subscribeOnError`
+
+``` purescript
+subscribeOnError :: forall eff a. Observable a -> (Error -> Eff eff Unit) -> Eff eff Unit
+```
+
+
 #### `merge`
 
 ``` purescript
