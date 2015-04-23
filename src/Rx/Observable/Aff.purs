@@ -11,14 +11,14 @@ foreign import liftAff
   function liftAff(aff) {
     return function() {
       var Rx = require('rx');
-      return new Rx.AnonymousObservable(function (observer) {
-        return aff(function(a) {
-          observer.onNext(a);
-          observer.onCompleted();
-        }, function(e) {
-          observer.onError(e);
-        });
-      }).publishLast().refCount();
+      var subject = new Rx.AsyncSubject();
+      aff(function(a) {
+        subject.onNext(a);
+        subject.onCompleted();
+      }, function(e) {
+        subject.onError(e);
+      });
+      return subject;
     };
   }
   """ :: forall eff err a. Aff eff a -> Eff eff (Observable a)
