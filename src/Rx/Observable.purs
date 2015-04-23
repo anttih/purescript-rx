@@ -16,6 +16,7 @@ module Rx.Observable
   , range
   , runObservable
   , scan
+  , subscribe'
   , subscribe
   , subscribeOnCompleted
   , subscribeOnError
@@ -110,6 +111,29 @@ foreign import generate
     };
   }
   """ :: forall a b. a -> (a -> Boolean) -> (a -> a) -> (a -> b) -> Observable b
+
+foreign import subscribe'
+  """
+  function subscribe$prime(ob) {
+    return function(onNext) {
+      return function(onError) {
+        return function(onCompleted) {
+          return function() {
+            return ob.subscribe(
+              function(value) { onNext(value)(); },
+              function(err) { onError(err)(); },
+              function() { onCompleted()(); }
+            );
+          };
+        }
+      }
+    }
+  }
+  """ :: forall eff a. Observable a
+      -> (a -> Eff eff Unit)
+      -> (Error -> Eff eff Unit)
+      -> (Unit -> Eff eff Unit)
+      -> Eff eff Unit
 
 foreign import subscribe
   """

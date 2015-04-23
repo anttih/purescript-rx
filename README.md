@@ -120,6 +120,13 @@ generate :: forall a b. a -> (a -> Boolean) -> (a -> a) -> (a -> b) -> Observabl
 ```
 
 
+#### `subscribe'`
+
+``` purescript
+subscribe' :: forall eff a. Observable a -> (a -> Eff eff Unit) -> (Error -> Eff eff Unit) -> (Unit -> Eff eff Unit) -> Eff eff Unit
+```
+
+
 #### `subscribe`
 
 ``` purescript
