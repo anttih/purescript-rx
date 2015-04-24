@@ -4,6 +4,7 @@ module Rx.Observable
   , concat
   , debounce
   , delay
+  , dematerialize
   , distinct
   , distinctUntilChanged
   , filter
@@ -37,6 +38,8 @@ import Control.Alternative
 import Control.Monad.Eff
 import Data.Function(Fn2(), runFn2)
 import DOM
+
+import Rx.Notification
 
 -- | A type which represents streams of discrete events. Please see
 -- | [RxJS API documentation](https://github.com/Reactive-Extensions/RxJS/tree/master/doc)
@@ -345,6 +348,19 @@ foreign import delay
     };
   }
   """ :: forall a. Number -> Observable a -> Observable a
+
+foreign import dematerialize
+  """
+  function dematerialize(ob) {
+    return ob.map(function(a) {
+      switch (a.constructor.name) {
+        case "OnNext": return Rx.Notification.createOnNext(a.value0);
+        case "OnError": return Rx.Notification.createOnError(a.value0);
+        case "OnCompleted": return Rx.Notification.createOnCompleted();
+      }
+    }).dematerialize();
+  }
+  """ :: forall a. Observable (Notification a) -> Observable a
 
 foreign import distinct
   """

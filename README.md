@@ -273,6 +273,13 @@ delay :: forall a. Number -> Observable a -> Observable a
 ```
 
 
+#### `dematerialize`
+
+``` purescript
+dematerialize :: forall a. Observable (Notification a) -> Observable a
+```
+
+
 #### `distinct`
 
 ``` purescript

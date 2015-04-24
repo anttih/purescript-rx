@@ -29,6 +29,9 @@ main = do
   let s = pure "OnNext" <> throwError (error "OnError")
   subscribe' s trace (trace <<< message) (const $ print "OnCompleted")
 
+  let s' = pure (OnNext "OK") <> (pure $ OnError $ error "An error")
+  subscribe' (dematerialize $ s') trace (trace <<< message) (const $ print "OnCompleted")
+
   -- MonadError
   let err = throwError $ error "This is an error"
   subscribe (catchError err (pure <<< message)) trace
