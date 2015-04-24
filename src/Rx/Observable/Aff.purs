@@ -21,4 +21,4 @@ foreign import liftAff
       return subject;
     };
   }
-  """ :: forall eff err a. Aff eff a -> Eff eff (Observable a)
+  """ :: forall eff a. Aff eff a -> Eff eff (Observable a)

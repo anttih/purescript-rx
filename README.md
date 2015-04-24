@@ -328,7 +328,7 @@ withLatestFrom :: forall a b c. (a -> b -> c) -> Observable a -> Observable b ->
 #### `liftAff`
 
 ``` purescript
-liftAff :: forall eff err a. Aff eff a -> Eff eff (Observable a)
+liftAff :: forall eff a. Aff eff a -> Eff eff (Observable a)
 ```
 
 
