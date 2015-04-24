@@ -1,3 +1,16 @@
+## 0.6.0
+
+### Breaking changes
+
+* Rename Event to Notification and move to own module
+
+### New features
+
+* Add materialize and dematerialize
+* Add subscribe'
+* Add subscribeOnError
+
+
 ## v0.5.0
 
 ### Breaking changes
