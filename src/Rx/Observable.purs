@@ -12,6 +12,7 @@ module Rx.Observable
   , flatMapLatest
   , fromArray
   , generate
+  , materialize
   , merge
   , reduce
   , range
@@ -36,7 +37,7 @@ import Control.Monad.Eff.Exception (Error())
 import Control.Monad.Error.Class
 import Control.Alternative
 import Control.Monad.Eff
-import Data.Function(Fn2(), runFn2)
+import Data.Function (Fn2(), Fn4(), runFn2, runFn4)
 import DOM
 
 import Rx.Notification
@@ -348,6 +349,28 @@ foreign import delay
     };
   }
   """ :: forall a. Number -> Observable a -> Observable a
+
+foreign import _materialize
+  """
+  function _materialize(ob, onNext, onError, onCompleted) {
+    return ob.materialize().map(function(x) {
+      switch (x.kind) {
+        case 'N': return onNext(x.value);
+        case 'E': return onError(x.exception);
+        case 'C': return onCompleted;
+      }
+    });
+  }
+  """ :: forall a.
+      Fn4
+      (Observable a)
+      (a -> Notification a)
+      (Error -> Notification a)
+      (Notification a)
+      (Observable (Notification a))
+
+materialize :: forall a. Observable a -> Observable (Notification a)
+materialize ob = runFn4 _materialize ob OnNext OnError OnCompleted
 
 foreign import dematerialize
   """

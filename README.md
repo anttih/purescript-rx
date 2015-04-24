@@ -29,6 +29,13 @@ data Notification a
 ```
 
 
+#### `showNotification`
+
+``` purescript
+instance showNotification :: (Show a) => Show (Notification a)
+```
+
+
 
 ## Module Rx.Observable
 
@@ -270,6 +277,13 @@ reduce :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
 
 ``` purescript
 delay :: forall a. Number -> Observable a -> Observable a
+```
+
+
+#### `materialize`
+
+``` purescript
+materialize :: forall a. Observable a -> Observable (Notification a)
 ```
 
 
