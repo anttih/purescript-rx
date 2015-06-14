@@ -101,7 +101,7 @@ exports.takeUntil = function (other) {
   };
 }
 
-exports.map = function (f) {
+exports._map = function (f) {
   return function(ob) {
     return ob.map(f);
   };

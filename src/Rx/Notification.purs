@@ -1,5 +1,6 @@
 module Rx.Notification where
 
+import Prelude
 import Control.Monad.Eff.Exception (Error(), message)
 
 data Notification a = OnError Error | OnNext a | OnCompleted

@@ -38,7 +38,7 @@ import Control.Monad.Error.Class
 import Control.Alternative
 import Control.Monad.Eff
 import Data.Function (Fn2(), Fn4(), runFn2, runFn4)
-import DOM
+import Prelude
 
 import Rx.Notification
 
@@ -49,24 +49,24 @@ import Rx.Notification
 foreign import data Observable :: * -> *
 
 instance functorObservable :: Functor Observable where
-  (<$>) = map
+  map = _map
 
 instance applyObservable :: Apply Observable where
-  (<*>) = combineLatest id
+  apply = combineLatest id
 
 instance applicativeObservable :: Applicative Observable where
   pure = just
 
 instance observableBind :: Bind Observable where
-  (>>=) = flatMap
+  bind = flatMap
 
 instance monadObservable :: Monad Observable
 
 instance semigroupObservable :: Semigroup (Observable a) where
-  (<>) = concat
+  append = concat
 
 instance altObservable :: Alt Observable where
-  (<|>) = merge
+  alt = merge
 
 instance plusObservable :: Plus Observable where
   empty = _empty
@@ -115,7 +115,7 @@ foreign import take :: forall a. Number -> Observable a -> Observable a
 
 foreign import takeUntil :: forall a b. Observable b -> Observable a -> Observable a
 
-foreign import map :: forall a b. (a -> b) -> Observable a -> Observable b
+foreign import _map :: forall a b. (a -> b) -> Observable a -> Observable b
 
 foreign import flatMap :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 

@@ -3,6 +3,7 @@ module Rx.Observable.Cont
   )
   where
 
+import Prelude
 import Control.Monad.Eff
 import Control.Monad.Trans
 import Control.Monad.Cont.Trans
