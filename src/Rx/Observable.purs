@@ -111,7 +111,7 @@ foreign import combineLatest
 
 foreign import concat :: forall a. Observable a -> Observable a -> Observable a
 
-foreign import take :: forall a. Number -> Observable a -> Observable a
+foreign import take :: forall a. Int -> Observable a -> Observable a
 
 foreign import takeUntil :: forall a b. Observable b -> Observable a -> Observable a
 
@@ -129,15 +129,15 @@ foreign import runObservable :: forall eff. Observable (Eff eff Unit) -> Eff eff
 
 foreign import switchLatest :: forall a. Observable (Observable a) -> Observable a
 
-foreign import debounce :: forall a. Number -> Observable a -> Observable a
+foreign import debounce :: forall a. Int -> Observable a -> Observable a
 
 foreign import zip :: forall a b c. (a -> b -> c) -> Observable a -> Observable b -> Observable c
 
-foreign import range :: Number -> Number -> Observable Number
+foreign import range :: Int -> Int -> Observable Int
 
 foreign import reduce :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
 
-foreign import delay :: forall a. Number -> Observable a -> Observable a
+foreign import delay :: forall a. Int -> Observable a -> Observable a
 
 foreign import _materialize
   :: forall a.

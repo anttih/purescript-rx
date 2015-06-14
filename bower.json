@@ -13,12 +13,13 @@
     "build.sh"
   ],
   "dependencies": {
+    "purescript-prelude": "~0.1.0",
     "purescript-foldable-traversable": "~0.4.0",
     "purescript-control": "~0.3.0",
-    "purescript-aff": "~0.10.0",
-    "purescript-prelude": "~0.1.0-rc.1"
+    "purescript-aff": "~0.10.0"
   },
   "devDependencies": {
+    "purescript-console": "~0.1.0",
     "purescript-monadplus-partial": "~0.1.0",
     "purescript-tuples": "~0.4.0"
   }

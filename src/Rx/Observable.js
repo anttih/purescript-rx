@@ -9,7 +9,7 @@ exports.just = Rx.Observable.just;
 
 exports.fromArray = Rx.Observable.fromArray;
 
-exports._empty = Rx.Observable.empty;
+exports._empty = Rx.Observable.empty();
 
 exports.generate = function (initial) {
   return function (condition) {
@@ -21,7 +21,7 @@ exports.generate = function (initial) {
   };
 }
 
-exports.subscribe$prime = function (ob) {
+exports["subscribe'"] = function (ob) {
   return function(onNext) {
     return function(onError) {
       return function(onCompleted) {
