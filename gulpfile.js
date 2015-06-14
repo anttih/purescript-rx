@@ -49,7 +49,10 @@ gulp.task('pscDocs', function() {
     .pipe(plumber())
     .pipe(purescript.pscDocs({
       docgen: {
-        'Rx.Observable': 'docs/Rx.Observable',
+        'Rx.Observable': 'docs/Rx.Observable.md',
+        'Rx.Observable.Aff': 'docs/Rx.Observable.Aff.md',
+        'Rx.Observable.Cont': 'docs/Rx.Observable.Cont.md',
+        'Rx.Notification': 'docs/Rx.Notification.md'
       }
     }))
 })
