@@ -1,4 +1,4 @@
-# RxJs bindings for PureScript
+# PureScript bindings for RxJs
 
 ## Installation
 
