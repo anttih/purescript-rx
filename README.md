@@ -1,5 +1,12 @@
 # RxJs bindings for PureScript
 
+## Installation
+
+```
+npm install rx
+bower install purescript-rx
+```
+
 ## Module documentation
 
 * [Rx.Observable](docs/Rx.Observable.md)
