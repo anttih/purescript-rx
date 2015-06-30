@@ -57,12 +57,27 @@ gulp.task('pscDocs', function() {
     }))
 })
 
+gulp.task('ctags', function() {
+  return gulp.src(sources)
+    .pipe(plumber())
+    .pipe(purescript.pscDocs({
+      format: 'ctags',
+      docgen: [
+        'Rx.Observable',
+        'Rx.Observable.Aff',
+        'Rx.Observable.Cont',
+        'Rx.Notification'
+      ]
+    }))
+    .pipe(gulp.dest('tags'))
+})
+
 gulp.task('dotPsci', function() {
   return gulp.src(sources)
     .pipe(plumber())
     .pipe(purescript.dotPsci())
 })
 
-gulp.task('make', ['jsvalidate', 'pscMake', 'dotPsci', 'pscDocs']);
+gulp.task('make', ['jsvalidate', 'pscMake', 'dotPsci', 'pscDocs', 'ctags']);
 gulp.task('test', ['jsvalidate', 'browserify', 'pscDocs']);
 gulp.task('default', ['make']);
