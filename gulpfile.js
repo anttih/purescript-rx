@@ -4,8 +4,6 @@ var gulp = require('gulp');
 var purescript = require('gulp-purescript');
 var jsValidate = require('gulp-jsvalidate');
 var plumber = require("gulp-plumber");
-var source = require('vinyl-source-stream');
-var browserify = require('browserify');
 
 var sources = [
   'src/**/*.purs',
@@ -24,43 +22,37 @@ gulp.task('jsvalidate', function () {
     .pipe(jsValidate());
 });
 
-gulp.task('pscMake', function() {
-  return gulp.src(sources)
-    .pipe(plumber())
-    .pipe(purescript.pscMake({
-      output: 'output/node_modules',
-      ffi: foreigns
-    }))
+gulp.task('psc', function() {
+  return purescript.psc({
+    src: sources,
+    ffi: foreigns,
+    output: 'output/node_modules'
+  })
 });
 
-gulp.task('browserify', ['pscMake'], function() {
-  var b = browserify({
-    entries: './main.js',
-    debug: false
-  });
-
-  return b.bundle()
-    .pipe(source('bundle.js'))
-    .pipe(gulp.dest('./output/'));
+gulp.task('pscBundle', function() {
+  return purescript.pscBundle({
+    src: "output/node_modules/**/*.js",
+    output: "output/bundle.js",
+    main: 'Examples'
+  })
 });
 
 gulp.task('pscDocs', function() {
-  return gulp.src(sources)
-    .pipe(plumber())
-    .pipe(purescript.pscDocs({
+  return purescript.pscDocs({
+      src: sources,
       docgen: {
         'Rx.Observable': 'docs/Rx.Observable.md',
         'Rx.Observable.Aff': 'docs/Rx.Observable.Aff.md',
         'Rx.Observable.Cont': 'docs/Rx.Observable.Cont.md',
         'Rx.Notification': 'docs/Rx.Notification.md'
       }
-    }))
+    })
 })
 
 gulp.task('ctags', function() {
-  return gulp.src(sources)
-    .pipe(plumber())
-    .pipe(purescript.pscDocs({
+  return purescript.pscDocs({
+      src: sources,
       format: 'ctags',
       docgen: [
         'Rx.Observable',
@@ -68,16 +60,16 @@ gulp.task('ctags', function() {
         'Rx.Observable.Cont',
         'Rx.Notification'
       ]
-    }))
+    })
     .pipe(gulp.dest('tags'))
 })
 
 gulp.task('dotPsci', function() {
-  return gulp.src(sources)
-    .pipe(plumber())
-    .pipe(purescript.dotPsci())
+  return purescript.psci({
+      src: sources
+    })
 })
 
-gulp.task('make', ['jsvalidate', 'pscMake', 'dotPsci', 'pscDocs', 'ctags']);
-gulp.task('test', ['jsvalidate', 'browserify', 'pscDocs']);
+gulp.task('make', ['jsvalidate', 'psc', 'dotPsci', 'pscDocs', 'ctags']);
+gulp.task('test', ['jsvalidate', 'pscBundle', 'pscDocs']);
 gulp.task('default', ['make']);

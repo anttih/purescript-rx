@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "purescript-console": "~0.1.0",
-    "purescript-monadplus-partial": "~0.1.0",
+    "purescript-monadplus-partial": "~0.2.0",
     "purescript-tuples": "~0.4.0"
   }
 }
