@@ -1,3 +1,12 @@
+## 0.7.0
+
+This version only works with version 0.7.x of the PureScript compiler.
+
+### Breaking changes
+
+* Removed jQuery bindings, they are being moved to a separate library
+
+
 ## 0.6.0
 
 ### Breaking changes
