@@ -30,7 +30,7 @@ gulp.task('psc', function() {
   })
 });
 
-gulp.task('pscBundle', function() {
+gulp.task('pscBundle', ['psc'], function() {
   return purescript.pscBundle({
     src: "output/node_modules/**/*.js",
     output: "output/bundle.js",
