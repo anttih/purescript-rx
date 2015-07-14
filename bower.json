@@ -7,6 +7,10 @@
     "frp",
     "rx"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anttih/purescript-rx.git"
+  },
   "license": "MIT",
   "ignore": [
     "examples",
