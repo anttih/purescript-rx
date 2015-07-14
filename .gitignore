@@ -7,3 +7,4 @@ dist/
 .bower.json
 examples/combinators.js
 tags
+pursuit.json
