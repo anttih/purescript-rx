@@ -5,9 +5,7 @@ module Rx.Observable.Cont
 
 import Prelude
 import Control.Monad.Eff
-import Control.Monad.Trans
 import Control.Monad.Cont.Trans
-import Data.Either
 import Rx.Observable
 import Rx.Notification
 
