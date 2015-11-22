@@ -109,6 +109,12 @@ flatMapLatest :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 scan :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
 ```
 
+#### `startWith`
+
+``` purescript
+startWith :: forall a. a -> Observable a -> Observable a
+```
+
 #### `unwrap`
 
 ``` purescript
