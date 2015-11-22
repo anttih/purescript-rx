@@ -18,6 +18,7 @@ module Rx.Observable
   , range
   , runObservable
   , scan
+  , startWith
   , subscribe'
   , subscribe
   , subscribeOnCompleted
@@ -122,6 +123,8 @@ foreign import flatMap :: forall a b. Observable a -> (a -> Observable b) -> Obs
 foreign import flatMapLatest :: forall a b. Observable a -> (a -> Observable b) -> Observable b
 
 foreign import scan :: forall a b. (a -> b -> b) -> b -> Observable a -> Observable b
+
+foreign import startWith :: forall a. a -> Observable a -> Observable a
 
 foreign import unwrap :: forall eff a. Observable (Eff eff a) -> Eff eff (Observable a)
 

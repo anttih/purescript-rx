@@ -129,6 +129,12 @@ exports.scan = function scan(f) {
   };
 }
 
+exports.startWith = function (start) {
+  return function(ob) {
+    return ob.startWith(start);
+  };
+}
+
 exports.unwrap = function (ob) {
   return function() {
     return ob.map(function(eff) {
