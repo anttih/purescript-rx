@@ -197,7 +197,7 @@ exports._materialize = function (ob, onNext, onError, onCompleted) {
   return ob.materialize().map(function(x) {
     switch (x.kind) {
       case 'N': return onNext(x.value);
-      case 'E': return onError(x.exception);
+      case 'E': return onError(x.error);
       case 'C': return onCompleted;
     }
   });
