@@ -122,9 +122,9 @@ exports.flatMapLatest = function (ob) {
 exports.scan = function scan(f) {
   return function(seed) {
     return function(ob) {
-      return ob.scan(seed, function(acc, value) {
+      return ob.scan(function(acc, value) {
         return f(value)(acc);
-      });
+      }, seed);
     };
   };
 }
