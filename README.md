@@ -7,5 +7,7 @@ npm install rx
 bower install purescript-rx
 ```
 
-## [Module documentation](http://pursuit.purescript.org/packages/purescript-rx/)
+## Documentation
+
+Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-rx/). 
 
