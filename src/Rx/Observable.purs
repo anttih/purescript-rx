@@ -31,17 +31,18 @@ module Rx.Observable
   , withLatestFrom
   ) where
 
-import Control.Alt
-import Control.Plus
-import Control.MonadPlus
+import Control.Alt (class Alt)
+import Control.Plus (class Plus)
+import Control.MonadPlus (class MonadPlus)
 import Control.Monad.Eff.Exception (Error())
-import Control.Monad.Error.Class
-import Control.Alternative
-import Control.Monad.Eff
+import Control.Monad.Error.Class (class MonadError)
+import Control.Alternative (class Alternative)
+import Control.Monad.Eff (Eff)
 import Data.Function (Fn2(), Fn4(), runFn2, runFn4)
-import Prelude
+import Prelude (class Semigroup, class Monad, class Bind, class Applicative,
+               class Apply, class Functor, Unit, id)
 
-import Rx.Notification
+import Rx.Notification (Notification(OnCompleted, OnError, OnNext))
 
 -- | A type which represents streams of discrete events. Please see
 -- | [RxJS API documentation](https://github.com/Reactive-Extensions/RxJS/tree/master/doc)

@@ -1,18 +1,23 @@
 module Examples where
 
-import Prelude
-import Control.MonadPlus.Partial
-import Control.Monad.Error.Class
+import Prelude (Unit, ($), bind, (>), return, pure, (<<<), (<$>), (<>), const,
+               (+), show, (++))
+import Control.MonadPlus.Partial (mcatMaybes, mpartition)
+import Control.Monad.Error.Class (catchError, throwError)
 import Control.Monad.Eff.Exception (message, error)
 import Data.Tuple (Tuple(..))
-import Data.Maybe
-import Control.Monad.Eff.Console (log, print)
+import Data.Maybe (Maybe(Just, Nothing))
+import Control.Monad.Eff (Eff)
+import Control.Monad.Eff.Console (CONSOLE, log, print)
 
-import Rx.Notification
-import Rx.Observable
-import Rx.Observable.Aff
+import Rx.Notification (Notification(OnError, OnNext))
+import Rx.Observable (fromArray, subscribe, runObservable, subscribeOnError,
+                     materialize, dematerialize, subscribe', delay, zip,
+                     reduce, combineLatest)
+import Rx.Observable.Aff (liftAff)
 import Rx.Observable.Cont (liftCont)
 
+main :: Eff (console :: CONSOLE) Unit
 main = do
   a <- return $ fromArray [1,2,3]
   b <- return $ fromArray [4,5,6]

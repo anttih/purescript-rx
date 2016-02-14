@@ -3,11 +3,11 @@ module Rx.Observable.Cont
   )
   where
 
-import Prelude
-import Control.Monad.Eff
-import Control.Monad.Cont.Trans
-import Rx.Observable
-import Rx.Notification
+import Prelude (Unit)
+import Control.Monad.Eff (Eff)
+import Control.Monad.Cont.Trans (ContT(ContT))
+import Rx.Observable (Observable)
+import Rx.Notification (Notification)
 
 liftCont :: forall eff a. ContT Unit (Eff eff) (Notification a) -> Eff eff (Observable a)
 liftCont (ContT f) = _liftCont f
