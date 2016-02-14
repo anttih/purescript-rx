@@ -1,5 +1,9 @@
 {
   "private": true,
+  "scripts": {
+    "build": "pulp build -I examples",
+    "test": "pulp test -I examples --main Examples"
+  },
   "dependencies": {
     "gulp": "^3.8.6",
     "gulp-jsvalidate": "^2.0.0",
