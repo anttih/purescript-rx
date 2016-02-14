@@ -1,14 +1,15 @@
 {
   "private": true,
   "scripts": {
+    "postinstall": "bower install",
     "build": "pulp build -I examples",
     "test": "pulp test -I examples --main Examples"
   },
   "dependencies": {
-    "gulp": "^3.8.6",
-    "gulp-jsvalidate": "^2.0.0",
-    "gulp-plumber": "^1.0.0",
-    "gulp-purescript": "^0.5.0",
     "rx": "*"
+  },
+  "devDependencies": {
+    "pulp": "^8.0.0",
+    "purescript": "^0.8.0"
   }
 }
