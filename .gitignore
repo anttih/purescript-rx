@@ -8,3 +8,4 @@ dist/
 examples/combinators.js
 tags
 pursuit.json
+.pulp-cache/
