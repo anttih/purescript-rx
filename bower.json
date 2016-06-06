@@ -17,14 +17,14 @@
     "build.sh"
   ],
   "dependencies": {
-    "purescript-prelude": "~0.1.0",
-    "purescript-foldable-traversable": "~0.4.0",
-    "purescript-control": "~0.3.0",
-    "purescript-aff": "~0.13.0"
+    "purescript-prelude": "^1.0.0",
+    "purescript-foldable-traversable": "^1.0.0",
+    "purescript-control": "^1.0.0",
+    "purescript-aff": "~0.17.0",
+    "purescript-functions": "~1.0.0"
   },
   "devDependencies": {
-    "purescript-console": "~0.1.0",
-    "purescript-monadplus-partial": "~0.2.0",
-    "purescript-tuples": "~0.4.0"
+    "purescript-console": "~1.0.0",
+    "purescript-tuples": "~1.0.0"
   }
 }

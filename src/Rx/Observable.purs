@@ -37,8 +37,9 @@ import Control.MonadPlus (class MonadPlus)
 import Control.Monad.Eff.Exception (Error())
 import Control.Monad.Error.Class (class MonadError)
 import Control.Alternative (class Alternative)
+import Control.MonadZero (class MonadZero)
 import Control.Monad.Eff (Eff)
-import Data.Function (Fn2(), Fn4(), runFn2, runFn4)
+import Data.Function.Uncurried (Fn2, Fn4, runFn2, runFn4)
 import Prelude (class Semigroup, class Monad, class Bind, class Applicative,
                class Apply, class Functor, Unit, id)
 
@@ -74,6 +75,8 @@ instance plusObservable :: Plus Observable where
   empty = _empty
 
 instance alternativeObservable :: Alternative Observable
+
+instance monadZero :: MonadZero Observable
 
 instance monadPlusObservable :: MonadPlus Observable
 
