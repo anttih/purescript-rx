@@ -6,8 +6,8 @@ import Control.Monad.Eff.Exception (message, error)
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow)
 
-import Rx.Notification (Notification(OnError, OnNext))
-import Rx.Observable (fromArray, subscribe, runObservable, subscribeOnError,
+import Rx.Notification (Notification(Error, Next))
+import Rx.Observable (fromArray, subscribe, runObservable, subscribeError,
                      materialize, dematerialize, subscribe', delay, zip,
                      reduce, combineLatest)
 import Rx.Observable.Aff (liftAff)
@@ -28,18 +28,18 @@ main = do
 
   subscribe (delay 1000 a) $ logShow
 
-  let s = pure "OnNext" <> throwError (error "OnError")
-  subscribe' s logShow (logShow <<< message) (const $ logShow "OnCompleted")
+  let s = pure "Next" <> throwError (error "Error")
+  subscribe' s logShow (logShow <<< message) (const $ logShow "Complete")
 
-  let s' = pure (OnNext "OK") <> (pure $ OnError $ error "An error")
-  subscribe' (dematerialize $ s') logShow (logShow <<< message) (const $ logShow "OnCompleted")
+  let s' = pure (Next "OK") <> (pure $ Error $ error "An error")
+  subscribe' (dematerialize $ s') logShow (logShow <<< message) (const $ logShow "Complete")
 
   subscribe (materialize $ pure "materialized" <> throwError (error "err")) logShow
 
   -- MonadError
   let err = throwError $ error "This is an error"
   subscribe (catchError err (pure <<< message)) logShow
-  subscribeOnError err (logShow <<< message)
+  subscribeError err (logShow <<< message)
 
   -- Aff
   v <- liftAff $ pure "hello"
@@ -47,11 +47,11 @@ main = do
 
   affE <- liftAff $ throwError $ error "This is an Aff error"
   subscribe (catchError affE (pure <<< message)) logShow
-  
+
   -- ContT
-  
-  c <- liftCont $ pure (OnNext "hello from ContT")
+
+  c <- liftCont $ pure (Next "hello from ContT")
   subscribe c logShow
 
-  contE <- liftCont $ pure (OnError (error "error from ContT"))
+  contE <- liftCont $ pure (Error (error "error from ContT"))
   subscribe (catchError contE (pure <<< message)) logShow

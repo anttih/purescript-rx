@@ -3,11 +3,11 @@
 
 // module Rx.Observable
 
-var Rx = require('rx');
+var Rx = require('rxjs');
 
-exports.just = Rx.Observable.just;
+exports._of = Rx.Observable.of;
 
-exports.fromArray = Rx.Observable.fromArray;
+exports.fromArray = Rx.Observable.from;
 
 exports._empty = Rx.Observable.empty();
 
@@ -22,14 +22,14 @@ exports.generate = function (initial) {
 }
 
 exports["subscribe'"] = function (ob) {
-  return function(onNext) {
-    return function(onError) {
-      return function(onCompleted) {
+  return function(next) {
+    return function(error) {
+      return function(complete) {
         return function() {
           return ob.subscribe(
-            function(value) { onNext(value)(); },
-            function(err) { onError(err)(); },
-            function() { onCompleted()(); }
+            function(value) { next(value)(); },
+            function(err) { error(err)(); },
+            function() { complete()(); }
           );
         };
       };
@@ -47,20 +47,20 @@ exports.subscribe = function (ob) {
   };
 }
 
-exports.subscribeOnCompleted = function (ob) {
+exports.subscribeComplete = function (ob) {
   return function(f) {
     return function() {
-      return ob.subscribeOnCompleted(function(value) {
+      return ob.subscribe(null, null, function(value) {
         f(value)();
       });
     };
   };
 }
 
-exports.subscribeOnError = function (ob) {
+exports.subscribeError = function (ob) {
   return function(f) {
     return function() {
-      return ob.subscribeOnError(function(err) {
+      return ob.subscribe(null, function(err) {
         f(err)();
       });
     };
@@ -193,12 +193,12 @@ exports.delay = function (ms){
   };
 }
 
-exports._materialize = function (ob, onNext, onError, onCompleted) {
+exports._materialize = function (ob, next, error, complete) {
   return ob.materialize().map(function(x) {
     switch (x.kind) {
-      case 'N': return onNext(x.value);
-      case 'E': return onError(x.error);
-      case 'C': return onCompleted;
+      case 'N': return next(x.value);
+      case 'E': return error(x.exception);
+      case 'C': return complete;
     }
   });
 }
@@ -206,9 +206,9 @@ exports._materialize = function (ob, onNext, onError, onCompleted) {
 exports.dematerialize = function (ob) {
   return ob.map(function(a) {
     switch (a.constructor.name) {
-      case "OnNext": return Rx.Notification.createOnNext(a.value0);
-      case "OnError": return Rx.Notification.createOnError(a.value0);
-      case "OnCompleted": return Rx.Notification.createOnCompleted();
+      case "Next": return Rx.Notification.createNext(a.value0);
+      case "Error": return Rx.Notification.createError(a.value0);
+      case "Complete": return Rx.Notification.createComplete();
     }
   }).dematerialize();
 }

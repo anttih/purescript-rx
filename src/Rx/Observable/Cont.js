@@ -3,18 +3,18 @@
 
 // module Rx.Observable.Cont
 
-var Rx = require('rx');
+var Rx = require('rxjs');
 
 exports._liftCont = function (cont) {
   return function() {
-    return new Rx.AnonymousObservable(function (observer) {
+    return new Rx.Observable.create(function (observer) {
       function callback(a) {
         return function() {
           switch (a.constructor.name) {
-            case "OnNext": observer.onNext(a.value0); break;
-            case "OnError": observer.onError(a.value0); break;
+            case "Next": observer.next(a.value0); break;
+            case "Error": observer.error(a.value0); break;
           }
-          observer.onCompleted();
+          observer.complete();
         };
       }
       cont(callback)();

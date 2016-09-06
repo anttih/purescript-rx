@@ -3,16 +3,16 @@
 
 // module Rx.Observable.Aff
 
-var Rx = require('rx');
+var Rx = require('rxjs');
 
 exports.liftAff = function (aff) {
   return function() {
     var subject = new Rx.AsyncSubject();
     aff(function(a) {
-      subject.onNext(a);
-      subject.onCompleted();
+      subject.next(a);
+      subject.complete();
     }, function(e) {
-      subject.onError(e);
+      subject.error(e);
     });
     return subject;
   };
