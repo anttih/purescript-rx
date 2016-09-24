@@ -21,8 +21,8 @@ module Rx.Observable
   , startWith
   , subscribe'
   , subscribe
-  , subscribeOnCompleted
-  , subscribeOnError
+  , subscribeComplete
+  , subscribeError
   , switchLatest
   , take
   , takeUntil
@@ -43,7 +43,7 @@ import Data.Function.Uncurried (Fn2, Fn4, runFn2, runFn4)
 import Prelude (class Semigroup, class Monad, class Bind, class Applicative,
                class Apply, class Functor, Unit, id)
 
-import Rx.Notification (Notification(OnCompleted, OnError, OnNext))
+import Rx.Notification (Notification(Complete, Error, Next))
 
 -- | A type which represents streams of discrete events. Please see
 -- | [RxJS API documentation](https://github.com/Reactive-Extensions/RxJS/tree/master/doc)
@@ -58,7 +58,7 @@ instance applyObservable :: Apply Observable where
   apply = combineLatest id
 
 instance applicativeObservable :: Applicative Observable where
-  pure = just
+  pure = _of
 
 instance observableBind :: Bind Observable where
   bind = flatMap
@@ -85,7 +85,7 @@ instance monadErrorObservable :: MonadError Error Observable where
   throwError = _throwError
 
 
-foreign import just :: forall a. a -> Observable a
+foreign import _of :: forall a. a -> Observable a
 
 foreign import fromArray :: forall a. Array a -> Observable a
 
@@ -103,10 +103,10 @@ foreign import subscribe'
 
 foreign import subscribe :: forall eff a. Observable a -> (a -> Eff eff Unit) -> Eff eff Unit
 
-foreign import subscribeOnCompleted
+foreign import subscribeComplete
   :: forall eff a. Observable a -> (Unit -> Eff eff Unit) -> Eff eff Unit
 
-foreign import subscribeOnError
+foreign import subscribeError
   :: forall eff a. Observable a -> (Error -> Eff eff Unit) -> Eff eff Unit
 
 foreign import merge :: forall a. Observable a -> Observable a -> Observable a
@@ -156,7 +156,7 @@ foreign import _materialize
      (Observable (Notification a))
 
 materialize :: forall a. Observable a -> Observable (Notification a)
-materialize ob = runFn4 _materialize ob OnNext OnError OnCompleted
+materialize ob = runFn4 _materialize ob Next Error Complete
 
 foreign import dematerialize :: forall a. Observable (Notification a) -> Observable a
 

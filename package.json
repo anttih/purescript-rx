@@ -6,7 +6,7 @@
     "test": "pulp test -I examples --main Examples"
   },
   "dependencies": {
-    "rx": "*"
+    "rxjs": "^5.0.0-beta.11"
   },
   "devDependencies": {
     "pulp": "^9.0.0",

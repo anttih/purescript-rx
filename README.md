@@ -3,7 +3,7 @@
 ## Installation
 
 ```
-npm install rx
+npm install rxjs
 bower install purescript-rx
 ```
 
