@@ -10,6 +10,6 @@
   },
   "devDependencies": {
     "pulp": "^9.0.0",
-    "purescript": "^0.9.1"
+    "purescript": "^0.10.1"
   }
 }
