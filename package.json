@@ -6,7 +6,7 @@
     "test": "pulp test -I examples --main Examples"
   },
   "dependencies": {
-    "rx": "*"
+    "rx": "4.1.0"
   },
   "devDependencies": {
     "pulp": "^9.0.0",
