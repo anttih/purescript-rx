@@ -35,7 +35,7 @@ import Control.Alt (class Alt)
 import Control.Plus (class Plus)
 import Control.MonadPlus (class MonadPlus)
 import Control.Monad.Eff.Exception (Error())
-import Control.Monad.Error.Class (class MonadError)
+import Control.Monad.Error.Class (class MonadError, class MonadThrow)
 import Control.Alternative (class Alternative)
 import Control.MonadZero (class MonadZero)
 import Control.Monad.Eff (Eff)
@@ -49,7 +49,7 @@ import Rx.Notification (Notification(OnCompleted, OnError, OnNext))
 -- | [RxJS API documentation](https://github.com/Reactive-Extensions/RxJS/tree/master/doc)
 -- | for more more examples.
 
-foreign import data Observable :: * -> *
+foreign import data Observable :: Type -> Type
 
 instance functorObservable :: Functor Observable where
   map = _map
@@ -82,6 +82,8 @@ instance monadPlusObservable :: MonadPlus Observable
 
 instance monadErrorObservable :: MonadError Error Observable where
   catchError = runFn2 _catchError
+
+instance monadThrowObservable :: MonadThrow Error Observable where
   throwError = _throwError
 
 
