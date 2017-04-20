@@ -31,6 +31,7 @@ module Rx.Observable
   , withLatestFrom
   ) where
 
+import Prelude
 import Control.Alt (class Alt)
 import Control.Plus (class Plus)
 import Control.MonadPlus (class MonadPlus)
@@ -40,8 +41,6 @@ import Control.Alternative (class Alternative)
 import Control.MonadZero (class MonadZero)
 import Control.Monad.Eff (Eff)
 import Data.Function.Uncurried (Fn2, Fn4, runFn2, runFn4)
-import Prelude (class Semigroup, class Monad, class Bind, class Applicative,
-               class Apply, class Functor, Unit, id)
 
 import Rx.Notification (Notification(OnCompleted, OnError, OnNext))
 
@@ -55,13 +54,13 @@ instance functorObservable :: Functor Observable where
   map = _map
 
 instance applyObservable :: Apply Observable where
-  apply = combineLatest id
+  apply mf ma = flatMapLatest mf (_ `map` ma)
 
 instance applicativeObservable :: Applicative Observable where
   pure = just
 
 instance observableBind :: Bind Observable where
-  bind = flatMap
+  bind = flatMapLatest
 
 instance monadObservable :: Monad Observable
 
