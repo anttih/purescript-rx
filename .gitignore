@@ -10,3 +10,4 @@ examples/combinators.js
 tags
 pursuit.json
 .pulp-cache/
+.psc-ide-port
