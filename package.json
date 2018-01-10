@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "psc-package update",
     "build": "pulp build -I examples",
     "test": "pulp test -I examples --main Examples"
   },
@@ -9,7 +9,7 @@
     "rx": "4.1.0"
   },
   "devDependencies": {
-    "pulp": "^11.0.0",
-    "purescript": "^0.11.0"
+    "pulp": "^12.0.0",
+    "purescript": "^0.11.7"
   }
 }

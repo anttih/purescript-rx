@@ -1,11 +1,13 @@
 {
-    "set": "psc-0.10.1",
+    "set": "psc-0.11.7",
     "depends": [
         "aff",
         "control",
         "foldable-traversable",
         "functions",
-				"prelude"
+        "prelude",
+        "console",
+        "tuples"
     ],
     "name": "rx",
     "source": "https://github.com/purescript/package-sets.git"

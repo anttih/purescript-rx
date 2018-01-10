@@ -7,10 +7,7 @@ import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow)
 
 import Rx.Notification (Notification(OnError, OnNext))
-import Rx.Observable (fromArray, subscribe, runObservable, subscribeOnError,
-                     materialize, dematerialize, subscribe', delay, zip,
-                     reduce, combineLatest)
-import Rx.Observable.Aff (liftAff)
+import Rx.Observable (combineLatest, delay, dematerialize, fromArray, materialize, reduce, subscribe, subscribe', subscribeOnError, zip)
 import Rx.Observable.Cont (liftCont)
 
 main :: Eff (console :: CONSOLE) Unit
@@ -42,14 +39,14 @@ main = do
   subscribeOnError err (logShow <<< message)
 
   -- Aff
-  v <- liftAff $ pure "hello"
-  runObservable $ logShow <$> v
+  -- v <- liftAff $ pure "hello"
+  -- runObservable $ logShow <$> v
 
-  affE <- liftAff $ throwError $ error "This is an Aff error"
-  subscribe (catchError affE (pure <<< message)) logShow
-  
+  -- affE <- liftAff $ throwError $ error "This is an Aff error"
+  -- subscribe (catchError affE (pure <<< message)) logShow
+
   -- ContT
-  
+
   c <- liftCont $ pure (OnNext "hello from ContT")
   subscribe c logShow
 
